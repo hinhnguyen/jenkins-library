@@ -41,8 +41,9 @@ def hasChangesIn(String module) {
     def HEAD = sh(
         returnStdout: true,
         // script: "git show -s --no-abbrev-commit --pretty=format:%P%n%H%n HEAD | tr ' ' '\n' | grep -v ${target_branch} | head -n 1"
-        //script: "git rev-parse remotes/origin/master"
-        script: "git rev-parse HEAD"
+        scritp: "git fetch --no-tags --force --progress -- https://github.com/axieinfinity/rust.git +refs/heads/master:refs/remotes/origin/master"
+        script: "git rev-parse remotes/origin/master"
+        // script: "git rev-parse HEAD"
     ).trim()
 
     return sh (
