@@ -41,13 +41,15 @@ def hasChangesIn(String module) {
     def HEAD = sh(
         returnStdout: true,
         // script: "git show -s --no-abbrev-commit --pretty=format:%P%n%H%n HEAD | tr ' ' '\n' | grep -v ${target_branch} | head -n 1"
-        script: "git fetch --no-tags --force --progress -- https://github.com/axieinfinity/rust.git +refs/heads/master:refs/remotes/origin/master && git rev-parse remotes/origin/master",
-        // script: "git rev-parse HEAD"
+        // script: "git fetch --no-tags --force --progress -- https://github.com/axieinfinity/rust.git +refs/heads/master:refs/remotes/origin/master && git rev-parse remotes/origin/master",
+        script: "git rev-parse HEAD"
+        // script: "git rev-parse remotes/origin/master",
     ).trim()
 
     return sh (
         returnStatus: true,
-        script: "git diff --name-only ${target_branch} ${HEAD} | grep -i '${module}'"
+        // script: "git diff --name-only ${target_branch} ${HEAD} | grep -i '${module}'"
+        script: "git branch"
     ) == 0
     // return result
 }
