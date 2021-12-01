@@ -42,7 +42,7 @@ def hasChangesIn(String module) {
         returnStdout: true,
         // script: "git show -s --no-abbrev-commit --pretty=format:%P%n%H%n HEAD | tr ' ' '\n' | grep -v ${target_branch} | head -n 1"
         //script: "git rev-parse remotes/origin/master"
-        script: "echo ahihi"
+        script: "git rev-parse HEAD"
     ).trim()
 
     return sh (
